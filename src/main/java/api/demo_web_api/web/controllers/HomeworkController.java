@@ -76,7 +76,7 @@ public class HomeworkController {
         homeworkServiceModel.setAuthor((UserServiceModel) httpSession.getAttribute("user"));
 
         homeworkService.addHomework(homeworkServiceModel);
-
+;
         return"redirect:/";
 }
 

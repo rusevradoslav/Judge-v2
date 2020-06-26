@@ -10,7 +10,7 @@ import javax.persistence.Table;
 public class Comment extends BaseEntity {
     private int score;
     private String textContent;
-    private UserServiceModel author;
+    private User author;
     private Homework homework;
 
     public Comment() {
@@ -27,7 +27,7 @@ public class Comment extends BaseEntity {
     }
 
     @ManyToOne
-    public UserServiceModel getAuthor() {
+    public User getAuthor() {
         return author;
     }
 
@@ -44,7 +44,7 @@ public class Comment extends BaseEntity {
         this.textContent = textContent;
     }
 
-    public void setAuthor(UserServiceModel author) {
+    public void setAuthor(User author) {
         this.author = author;
     }
 

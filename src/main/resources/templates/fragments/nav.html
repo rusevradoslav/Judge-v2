@@ -1,3 +1,5 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <a class="navbar-brand" th:href="@{/home}">
     <h1 class="tm-site-title mb-0">Judge v2</h1>
 </a>
@@ -6,13 +8,11 @@
     <span class="navbar-toggler-icon"></span>
 </button>
 
-<div class="collapse navbar-collapse" id="navbarSupportedContent">
+<div th:object="${session.user}" class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mx-auto">
 
         <li class="nav-item">
-            <a class="nav-link" th:if="${#session.getAttribute('username') != null}" >
-                <span>Hello,<span th:text="${#session.getAttribute('username')}"></span></span></a>
-
+            <a class="nav-link" th:href="@{/users/profile/(id = *{id})}" th:text="|Hello *{username}|"></a>
         </li>
 
         <li th:if="${#session.getAttribute('role') == 'ADMIN'}" class="nav-item dropdown">
@@ -36,7 +36,7 @@
             <a class="nav-link"  th:href="@{/homeworks/add}">Add Homework</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" th:href="@{/users/profile}">Profile</a>
+            <a class="nav-link" th:href="@{/users/profile/(id = *{id})}" >Profile</a>
         </li>
 
     </ul>

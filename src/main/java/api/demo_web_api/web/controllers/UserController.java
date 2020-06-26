@@ -3,16 +3,15 @@ package api.demo_web_api.web.controllers;
 import api.demo_web_api.models.binding.UserLoginBindingModel;
 import api.demo_web_api.models.binding.UserRegisterBindingModel;
 import api.demo_web_api.models.service.UserServiceModel;
+import api.demo_web_api.models.view.UserProfileViewModel;
 import api.demo_web_api.services.UserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -122,4 +121,18 @@ public class UserController {
         return modelAndView;
 
     }
+
+
+    @GetMapping("/profile")
+    public ModelAndView profile(@RequestParam("id") String id, ModelAndView modelAndView) {
+        System.out.println();
+
+        UserProfileViewModel userProfile = this.userService.findById(id);
+        modelAndView.addObject("userProfile",userProfile);
+        modelAndView.setViewName("profile");
+        return modelAndView;
+
+    }
+
+
 }

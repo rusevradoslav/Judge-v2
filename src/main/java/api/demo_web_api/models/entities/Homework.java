@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 public class Homework extends BaseEntity {
     private LocalDateTime addedOn;
     private String gitAddress;
-    private UserServiceModel author;
+    private User author;
     private Exercise exercise;
 
     public Homework() {
@@ -23,7 +23,7 @@ public class Homework extends BaseEntity {
     }
 
     @ManyToOne
-    public UserServiceModel getAuthor() {
+    public User getAuthor() {
         return author;
     }
 
@@ -44,7 +44,7 @@ public class Homework extends BaseEntity {
         this.gitAddress = gitAddress;
     }
 
-    public void setAuthor(UserServiceModel author) {
+    public void setAuthor(User author) {
         this.author = author;
     }
 

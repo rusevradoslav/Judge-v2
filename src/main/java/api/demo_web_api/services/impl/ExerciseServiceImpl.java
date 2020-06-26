@@ -11,6 +11,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class ExerciseServiceImpl implements ExerciseService {
@@ -43,6 +44,7 @@ public class ExerciseServiceImpl implements ExerciseService {
         return modelMapper.map(this.exerciseRepository.saveAndFlush(exercise), ExerciseServiceModel.class);
 
     }
+/*
 
     public List<String> getAllActiveExercise() {
 
@@ -78,5 +80,11 @@ public class ExerciseServiceImpl implements ExerciseService {
 
 
         return inactiveExerciseNames    ;
+    }
+*/
+
+    @Override
+    public List<String> getAllExercises() {
+        return this.exerciseRepository.findAll().stream().map(Exercise::getName).collect(Collectors.toList());
     }
 }

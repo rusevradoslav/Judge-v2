@@ -8,8 +8,10 @@ public interface ExerciseService {
     ExerciseServiceModel findExByName(String name);
 
     ExerciseServiceModel addExercise(ExerciseServiceModel map);
-    List<String> getAllActiveExercise();
+/*    List<String> getAllActiveExercise();
 
-    List<String> getAllInactiveExercise();
+    List<String> getAllInactiveExercise();*/
+
+    List<String> getAllExercises();
 
 }

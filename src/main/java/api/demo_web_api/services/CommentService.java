@@ -8,10 +8,14 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.HashMap;
 import java.util.List;
 
 public interface CommentService {
 
     void addComment(CommentServiceModel commentServiceModel);
 
+    double getAvgScoreOfGrade();
+
+    HashMap<Integer, Integer> getScoreMap();
 }

@@ -95,4 +95,21 @@ public class UserServiceImpl implements UserService {
 
         return this.userRepository.findById(id).map(user -> modelMapper.map(user, UserProfileViewModel.class)).orElse(null);
     }
+
+    @Override
+    public long findAllUsersCount() {
+        return this.userRepository.count();
+    }
+
+    @Override
+    public List<String> getTopThreeStudents() {
+        return this.userRepository.
+                findAll()
+                .stream()
+                .sorted((a,b) -> b.getHomeworks().size()-a.getHomeworks().size())
+                .map(user -> user.getUsername())
+                .limit(3)
+                .collect(Collectors.toList());
+
+    }
 }

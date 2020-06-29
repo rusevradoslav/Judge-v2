@@ -46,7 +46,7 @@ public class ExerciseServiceImpl implements ExerciseService {
         return modelMapper.map(this.exerciseRepository.saveAndFlush(exercise), ExerciseServiceModel.class);
 
     }
-/*
+
 
     public List<String> getAllActiveExercise() {
 
@@ -66,6 +66,7 @@ public class ExerciseServiceImpl implements ExerciseService {
         return activeExerciseNames    ;
     }
 
+/*
     @Override
     public List<String> getAllInactiveExercise() {
 
@@ -84,6 +85,7 @@ public class ExerciseServiceImpl implements ExerciseService {
         return inactiveExerciseNames    ;
     }
 */
+
 
     @Override
     public List<String> getAllExercises() {

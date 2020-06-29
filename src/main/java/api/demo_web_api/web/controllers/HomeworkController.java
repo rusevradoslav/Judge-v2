@@ -11,6 +11,7 @@ import api.demo_web_api.models.view.HomeworkViewModel;
 import api.demo_web_api.services.CommentService;
 import api.demo_web_api.services.ExerciseService;
 import api.demo_web_api.services.HomeworkService;
+import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,6 +29,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/homeworks")
+@AllArgsConstructor
 public class HomeworkController {
 
     private final HomeworkService homeworkService;
@@ -35,11 +37,6 @@ public class HomeworkController {
     private final CommentService commentService;
 
 
-    public HomeworkController(HomeworkService homeworkService, ExerciseService exerciseService, CommentService commentService) {
-        this.homeworkService = homeworkService;
-        this.exerciseService = exerciseService;
-        this.commentService = commentService;
-    }
 
     @GetMapping("/add")
     public String add(Model model, HttpSession httpSession) {

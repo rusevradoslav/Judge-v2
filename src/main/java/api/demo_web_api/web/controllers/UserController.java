@@ -7,6 +7,7 @@ import api.demo_web_api.models.service.UserServiceModel;
 import api.demo_web_api.models.view.UserProfileViewModel;
 import api.demo_web_api.services.HomeworkService;
 import api.demo_web_api.services.UserService;
+import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -23,17 +24,12 @@ import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/users")
+@AllArgsConstructor
 public class UserController {
     private final UserService userService;
     private final HomeworkService homeworkService;
     private final ModelMapper modelMapper;
 
-    @Autowired
-    public UserController(UserService userService, HomeworkService homeworkService, ModelMapper modelMapper) {
-        this.userService = userService;
-        this.homeworkService = homeworkService;
-        this.modelMapper = modelMapper;
-    }
 
     @GetMapping("/login")
     public ModelAndView login(@Valid @ModelAttribute("userLoginBindingModel") UserLoginBindingModel userLoginBindingModel,

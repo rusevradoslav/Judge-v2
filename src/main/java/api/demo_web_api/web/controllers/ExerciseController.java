@@ -5,6 +5,7 @@ import api.demo_web_api.models.binding.ExerciseAddBindingModel;
 import api.demo_web_api.models.service.ExerciseServiceModel;
 import api.demo_web_api.models.service.UserServiceModel;
 import api.demo_web_api.services.ExerciseService;
+import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -21,16 +22,14 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/exercises")
+@AllArgsConstructor
 public class ExerciseController {
 
     private final ExerciseService exerciseService;
 
 
-    public ExerciseController(ExerciseService exerciseService) {
-        this.exerciseService = exerciseService;
 
 
-    }
 
     @GetMapping("/add")
     public ModelAndView add(

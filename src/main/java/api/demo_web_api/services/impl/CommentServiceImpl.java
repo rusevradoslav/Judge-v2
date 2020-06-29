@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.HashMap;
 
 @Service
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
@@ -22,8 +23,34 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     public void addComment(CommentServiceModel commentServiceModel) {
-        Homework homework = this.modelMapper.map(commentServiceModel.getHomework(),Homework.class);
+        Homework homework = this.modelMapper.map(commentServiceModel.getHomework(), Homework.class);
         Comment comment = this.commentRepository.saveAndFlush(this.modelMapper.map(commentServiceModel, Comment.class));
         homework.getComments().add(comment);
+    }
+
+    @Override
+    public double getAvgScoreOfGrade() {
+        return this.commentRepository.findAll()
+                .stream()
+                .mapToDouble(comment -> comment.getScore()).average().orElse(0D);
+    }
+
+    @Override
+    public HashMap<Integer, Integer> getScoreMap() {
+        HashMap<Integer, Integer> scoreMap = new HashMap<>();
+
+        this.commentRepository
+                .findAll()
+                .forEach(comment -> {
+                            int score = comment.getScore();
+                            if (scoreMap.containsKey(score)) {
+                                scoreMap.put(score, scoreMap.get(score) + 1);
+                            } else {
+                                scoreMap.put(score, 1);
+                            }
+                        }
+                );
+        System.out.println();
+        return scoreMap;
     }
 }

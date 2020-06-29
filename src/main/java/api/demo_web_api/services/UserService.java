@@ -21,4 +21,7 @@ public interface UserService {
 
     UserProfileViewModel findById(String id);
 
+    long findAllUsersCount();
+
+    List<String> getTopThreeStudents();
 }

@@ -4,9 +4,12 @@ import api.demo_web_api.models.entities.Exercise;
 import api.demo_web_api.models.service.ExerciseServiceModel;
 import api.demo_web_api.repositories.ExerciseRepository;
 import api.demo_web_api.services.ExerciseService;
+import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -14,14 +17,13 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
+@Transactional
 public class ExerciseServiceImpl implements ExerciseService {
     private final ExerciseRepository exerciseRepository;
     private final ModelMapper modelMapper;
 
-    public ExerciseServiceImpl(ExerciseRepository exerciseRepository, ModelMapper modelMapper) {
-        this.exerciseRepository = exerciseRepository;
-        this.modelMapper = modelMapper;
-    }
+
 
     @Override
     public ExerciseServiceModel findExByName(String name) {

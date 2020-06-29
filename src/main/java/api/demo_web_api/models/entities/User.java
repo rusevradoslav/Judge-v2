@@ -4,6 +4,7 @@ import org.hibernate.validator.constraints.Length;
 
 
 import javax.persistence.*;
+import java.util.List;
 
 
 @Entity
@@ -15,6 +16,8 @@ public class User extends BaseEntity {
     private String email;
     private String git;
     private Role role;
+    private List<Homework> homeworks;
+
 
     public User() {
 
@@ -49,6 +52,15 @@ public class User extends BaseEntity {
     @ManyToOne(targetEntity = Role.class, fetch = FetchType.EAGER)
     public Role getRole() {
         return role;
+    }
+
+    @OneToMany(mappedBy = "author")
+    public List<Homework> getHomeworks() {
+        return homeworks;
+    }
+
+    public void setHomeworks(List<Homework> homeworks) {
+        this.homeworks = homeworks;
     }
 
     public void setRole(Role role) {

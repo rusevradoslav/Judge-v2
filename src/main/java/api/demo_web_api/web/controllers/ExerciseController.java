@@ -74,7 +74,7 @@ public class ExerciseController {
                 redirectAttributes.addFlashAttribute("exerciseAddBindingModel", exerciseAddBindingModel);
                 modelAndView.setViewName("redirect:/exercises/add");
             } else {
-                modelAndView.setViewName("redirect:/home");
+                modelAndView.setViewName("redirect:/");
 
             }
         }

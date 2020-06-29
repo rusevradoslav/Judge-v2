@@ -1,10 +1,8 @@
 package api.demo_web_api.models.entities;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "homeworks")
@@ -13,6 +11,7 @@ public class Homework extends BaseEntity {
     private String gitAddress;
     private User author;
     private Exercise exercise;
+    private List<Comment> comments;
 
     public Homework() {
     }
@@ -34,6 +33,15 @@ public class Homework extends BaseEntity {
 
     public LocalDateTime getAddedOn() {
         return addedOn;
+    }
+
+    @OneToMany(mappedBy = "homework")
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
     }
 
     public void setAddedOn(LocalDateTime addedOn) {

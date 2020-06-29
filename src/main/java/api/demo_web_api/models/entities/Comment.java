@@ -8,6 +8,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "comments")
 public class Comment extends BaseEntity {
+
     private int score;
     private String textContent;
     private User author;

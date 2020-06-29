@@ -9,6 +9,7 @@ import api.demo_web_api.models.view.UserProfileViewModel;
 import api.demo_web_api.repositories.UserRepository;
 import api.demo_web_api.services.RoleService;
 import api.demo_web_api.services.UserService;
+import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -18,19 +19,15 @@ import javax.transaction.Transactional;
 import java.util.List;
 import java.util.stream.Collectors;
 
+
 @Service
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 @Transactional
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final ModelMapper modelMapper;
     private final RoleService roleService;
 
-    @Autowired
-    public UserServiceImpl(UserRepository userRepository, ModelMapper modelMapper, RoleService roleService) {
-        this.userRepository = userRepository;
-        this.modelMapper = modelMapper;
-        this.roleService = roleService;
-    }
 
     @Override
     public UserServiceModel registerUser(UserServiceModel userServiceModel) {
@@ -39,7 +36,7 @@ public class UserServiceImpl implements UserService {
 
         User user = this.modelMapper.map(userServiceModel, User.class);
 
-        return this.modelMapper.map(userRepository.saveAndFlush(user),UserServiceModel.class);
+        return this.modelMapper.map(userRepository.saveAndFlush(user), UserServiceModel.class);
     }
 
     @Override
@@ -51,7 +48,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserServiceModel findUniqueUser(String username, String email, String git) {
-       UserServiceModel userServiceModel = null;
+        UserServiceModel userServiceModel = null;
         if (userRepository.findFirstByUsername(username).orElse(null) != null) {
             userServiceModel = this.modelMapper.map(userRepository.findFirstByUsername(username).orElse(null), UserServiceModel.class);
         }
@@ -96,6 +93,6 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserProfileViewModel findById(String id) {
 
-        return this.userRepository.findById(id).map(user -> modelMapper.map(user,UserProfileViewModel.class)).orElse(null);
+        return this.userRepository.findById(id).map(user -> modelMapper.map(user, UserProfileViewModel.class)).orElse(null);
     }
 }

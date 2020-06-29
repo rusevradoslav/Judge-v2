@@ -15,8 +15,5 @@ public class HomeController {
         return httpSession.getAttribute("user") == null ? "index" : "home";
     }
 
-    @GetMapping("/home")
-    public String home() {
-        return "home";
-    }
+
 }

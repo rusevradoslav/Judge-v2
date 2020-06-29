@@ -2,14 +2,15 @@ package api.demo_web_api.web.controllers;
 
 import api.demo_web_api.models.binding.UserLoginBindingModel;
 import api.demo_web_api.models.binding.UserRegisterBindingModel;
+import api.demo_web_api.models.service.HomeworkServiceModel;
 import api.demo_web_api.models.service.UserServiceModel;
 import api.demo_web_api.models.view.UserProfileViewModel;
+import api.demo_web_api.services.HomeworkService;
 import api.demo_web_api.services.UserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -17,16 +18,20 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/users")
 public class UserController {
     private final UserService userService;
+    private final HomeworkService homeworkService;
     private final ModelMapper modelMapper;
 
     @Autowired
-    public UserController(UserService userService, ModelMapper modelMapper) {
+    public UserController(UserService userService, HomeworkService homeworkService, ModelMapper modelMapper) {
         this.userService = userService;
+        this.homeworkService = homeworkService;
         this.modelMapper = modelMapper;
     }
 
@@ -64,7 +69,7 @@ public class UserController {
                 httpSession.setAttribute("username", userServiceModel.getUsername());
                 httpSession.setAttribute("id", userServiceModel.getId());
                 httpSession.setAttribute("role", userServiceModel.getRole().getName());
-                modelAndView.setViewName("redirect:/home");
+                modelAndView.setViewName("redirect:/");
             }
         }
 
@@ -123,12 +128,14 @@ public class UserController {
     }
 
 
-    @GetMapping("/profile")
+    @GetMapping("/profile")  /*@GetMapping("/profile/{id}") @PathVariable("id") String id,*/
     public ModelAndView profile(@RequestParam("id") String id, ModelAndView modelAndView) {
-        System.out.println();
 
         UserProfileViewModel userProfile = this.userService.findById(id);
-        modelAndView.addObject("userProfile",userProfile);
+        String homeworksNames = this.homeworkService.findAllHomeWorksByUserId(id);
+        System.out.println();
+        modelAndView.addObject("userProfile", userProfile);
+        modelAndView.addObject("userHomeworks", homeworksNames);
         modelAndView.setViewName("profile");
         return modelAndView;
 

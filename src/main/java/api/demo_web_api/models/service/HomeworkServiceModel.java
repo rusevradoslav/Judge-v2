@@ -9,6 +9,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Getter
 @Setter
@@ -23,6 +24,7 @@ public class HomeworkServiceModel extends BaseServiceModel {
     private String gitAddress;
     private UserServiceModel author;
     private ExerciseServiceModel exercise;
+    private List<CommentServiceModel> comments;
 
 
 }

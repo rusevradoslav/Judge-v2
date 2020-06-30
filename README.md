@@ -21,21 +21,20 @@
 *   MySQL Database
 *   JPA
 
-
-- **Without authentication** you can see : 
+ **Without authentication** you can see : 
 
   - the index page
   - the login page
   - the user registration form
 
-- **Users** can : 
+**Users** can : 
 
    - see their profile page
    - add homework
    - check homework
 
 
-- **Admins** can : 
+**Admins** can : 
 
    - see their profile page
    - add homework

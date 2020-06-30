@@ -29,18 +29,18 @@
 
 **Users** can : 
 
-   - see their profile page
-   - add homework
-   - check homework
+    - see their profile page
+    - add homework
+    - check homework
 
 
 **Admins** can : 
 
-   - see their profile page
-   - add homework
-   - check homework
-   - add exercise
-   - change user role
+    - see their profile page
+    - add homework
+    - check homework
+    - add exercise
+    - change user role
    
 ### Routes
 
